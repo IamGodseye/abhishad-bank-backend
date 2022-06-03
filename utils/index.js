@@ -27,6 +27,7 @@ export const getRandomNumber = (digit) => {
 }
 
 export const transactionHelper = async (send, receive, amount, done) => {
+
     const receiver = await User.findOne({ accountNumber: receive })
     const sender = await User.findOne({ accountNumber: send })
     const doneBy = await User.findById(done)
@@ -36,6 +37,7 @@ export const transactionHelper = async (send, receive, amount, done) => {
 
     // processing transaction
     const amountBal = BigInt(amount)
+    if (amountBal < 0n) throw Error('Amount is negative')
     let senderBal = BigInt(sender.balance)
     let receiverBal = BigInt(receiver.balance)
 
