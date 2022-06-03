@@ -37,7 +37,7 @@ export const transactionHelper = async (send, receive, amount, done) => {
 
     // processing transaction
     const amountBal = BigInt(amount)
-    if (amountBal < 0n) throw Error('Amount is negative')
+    if (amountBal <= 0n) throw Error('Amount is negative or Zero')
     let senderBal = BigInt(sender.balance)
     let receiverBal = BigInt(receiver.balance)
 
